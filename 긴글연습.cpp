@@ -19,10 +19,10 @@ char long_input[10][100]={0};
 int length[10]={0};
 int ln=0,col=0;
 int count_answers(int randint){
-	if(ln==0 && col==0) return 1;
+	if(ln==0 && col==0) return 0;//ì²˜ìŒ ì‹¤í–‰ì‹œ 0%ë¡œ ì´ˆê¸°í™”  
 	int corcnt=0;
 	for(int i=0;i<=ln;i++){
-		for(int j=0;j<length[ln];j++){
+		for(int j=0;j<=length[i];j++){
 			if(long_para[randint][i][j]==long_input[i][j] && long_input[i][j]!='\n' && long_input[i][j]!='\0')
 			corcnt++;
 		}
@@ -31,13 +31,14 @@ int count_answers(int randint){
 }
 
 int count_inputs(){
-	if(ln==0 && col==0) return 1;
-	//°¹¼ö Àß ¼¼´Â°Å È®ÀÎ ¿Ï·á 
+	if(ln==0 && col==0) return 1; //ì²˜ìŒ ì‹¤í–‰ì‹œ 0%ë¡œ ì´ˆê¸°í™” 
 	int cnt=0;
-	for(int i=0;i<ln;i++){
-		cnt+=length[i];
+	for(int i=0;i<=ln;i++){
+		for(int j=0;j<=length[i];j++){
+			if(long_input[i][j]!='\n' && long_input[i][j]!='\0')
+			cnt++;
+		}
 	}
-	cnt+=col;
 	return cnt;
 }
 void print(int randint,int ln,int col){
@@ -46,9 +47,9 @@ void print(int randint,int ln,int col){
 	printf("%d ",length[i]);
 	printf("\n");
 	printf("%d %d\n",ln,col);
-	//Á¤È®µµ, ÇöÀçÅ¸¼ö Ãâ·Â
-	printf("Á¤È®µµ : %.0f%% ÇöÀçÅ¸¼ö : %d\n",(float)count_answers(randint)/count_inputs()*100,0); 
-	//Á¤´ä Ãâ·Â  
+	//ì •í™•ë„, í˜„ì¬íƒ€ìˆ˜ ì¶œë ¥
+	printf("ì •í™•ë„ : %.0f%% %d ,%d\n",(float)count_answers(randint)/count_inputs()*100,count_answers(randint),count_inputs()); 
+	//ì •ë‹µ ì¶œë ¥  
 	if(ln<5){
 		for(int i=0;i<5;i++)
 			printf("%s",long_para[randint][i]);
@@ -58,7 +59,7 @@ void print(int randint,int ln,int col){
 			printf("%s",long_para[randint][i]);
 	}
 	
-	//Áö±İ±îÁö ÀÔ·ÂµÈ °Í Ãâ·Â
+	//ì§€ê¸ˆê¹Œì§€ ì…ë ¥ëœ ê²ƒ ì¶œë ¥
 	if(ln<5){
 		for(int i=0;i<=ln;i++){
 			printf("%s",long_input[i]);
@@ -72,13 +73,13 @@ void print(int randint,int ln,int col){
 }
 
 int main(){
-	srand(time(NULL)); //½Ãµå ÃÊ±âÈ­
+	srand(time(NULL)); //ì‹œë“œ ì´ˆê¸°í™”
 	int randint=rand()%4,c;
-	//°¢ ÁÙÀÇ ±ÛÀÚ¼ö ¼À 
+	//ê° ì¤„ì˜ ê¸€ììˆ˜ ì…ˆ 
 	for(int i=0;i<10;i++){
-		for(int j=0;j<200;j++){
+		for(int j=0;j<100;j++){
 			if(long_para[randint][i][j]=='\n'){
-			length[i]=j;break;//1ºÎÅÍ ¼¾´Ù(±æÀÌ) 
+			length[i]=j;break;//1ë¶€í„° ì„¼ë‹¤(ê¸¸ì´) 
 			} 
 		}
 	}
@@ -86,10 +87,10 @@ int main(){
 	int accu,tpm;
 	print(randint,ln,col);
 	while(ln<10){
-		if((c=getch())==27){ //ESC Å°  
+		if((c=getch())==27){ //ESC í‚¤  
 				main();
 			}
-		else if(c=='\b'){ //¹é½ºÆäÀÌ½º
+		else if(c=='\b'){ //ë°±ìŠ¤í˜ì´ìŠ¤
 			if(col>0 && ln>0){
 				long_input[ln][col-1]=0;
 				col--;
@@ -107,7 +108,7 @@ int main(){
 			print(randint,ln,col);
 		}
 		else{
-			 if(col>=length[ln]-1 && ln<=10){
+			 if(col>length[ln]-2 && ln<=10){
 			 	long_input[ln][col]=c;
 			 	long_input[ln][col+1]='\n';
 				col=0;
