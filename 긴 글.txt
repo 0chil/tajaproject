@@ -7,5 +7,5 @@ char long_para[4][10][100]={"The Middle\n","Take a seat right over there, sat on
 	"Wolves\n","In your eyes, there's a heavy blue\n","One to love and one to lose\n","Sweet divide, a heavy truth\n","Water or wine, don't make me choose\n", \
 	"I wanna feel the way that we did that summer night\n","Drunk on a feeling, alone with the stars in the sky\n","I've been running through the jungle\n","I've been running with the wolves\n","To get to you, to get to you\n", \
 	
-	"Butterflies And Hurricanes\n","Change everything you are and everything you were\n","Your number has been called. Fights and battles have begun\n", \
-	"Revenge will surely come. Your hard times are ahead\n","Best, You've got to be the best. you've got to change the world\n","And use this chance to be heard\n"};
+	"Butterflies And Hurricanes\n","Change everything you are\n","And everything you were\n","Your number has been called\n"," Fights and battles have begun\n", \
+	"Revenge will surely come\n"," Your hard times are ahead\n","Best, You've got to be the best\n","You've got to change the world\n","And use this chance to be heard\n"};
