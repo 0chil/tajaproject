@@ -29,7 +29,7 @@ void positionT(){
 	printf("     %c     \n",answer);
 	printf("***********\n");
 	printf("%d번째 입력\n",hit+1);
-	printf("진행도:%d/20\n 오타수:%d\n 정확도:%.2f%%\n",prog,miss,acc*100);
+	printf("진행도:%d/20\n오타수:%d\n정확도:%.2f%%\n",prog,miss,acc*100);
 	input=getch();
 	if(input==answer){
 	prog++;
