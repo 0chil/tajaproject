@@ -28,7 +28,8 @@ int st_length[5] = {0,};
 int corcnt=0;
 double tpm=0.0,htpm=0.0;
 
-int getch(void){
+int getch_flush(void){
+	fflush(stdout);
 	char ch;
 	struct termios t_old,t_new;
 	tcgetattr(STDIN_FILENO,&t_old);
@@ -56,7 +57,7 @@ void positionT() {
 		printf("***********\n");
 		printf("%d번째 입력\n", hit + 1);
 		printf("진행도:%.0f%%\n오타수:%d\n정확도:%.2f%%\n", (double)prog/20*100, miss, acc * 100);
-		input = getch();
+		input = getch_flush();
 		if (input == answer) {
 			prog++;
 			hit++;
@@ -76,7 +77,7 @@ void positionT() {
 	system("clear");
 	printf("시도횟수: %d , 오타수:%d , 정확도:%.2f%%\n", hit, miss, acc * 100);
 	while(1) {
-		if (input=getch() == '\n') {
+		if (input=getch_flush() == '\n') {
 			system("clear");
 			main();
 		}
@@ -88,7 +89,6 @@ void wordT() {
 }
 
 void ST_print(int randint, int T, int save, double els_time) {
-	fflush(stdout);
 	system("clear");
 	int son=0;
 	for(int i=0;i<=strlen(short_input[T]);i++){
@@ -148,8 +148,7 @@ void SparagraphT(){
 		ST_print(randint, T, 0,els_time);
 
 		while(strlen(short_input[T]) <= st_length[T]){
-			fflush(stdout);
-			if ((c = getch()) == 27) { //ESC 키  
+			if ((c = getch_flush()) == 27) { //ESC 키  
 				system("clear");
 				main();
 			}
@@ -173,8 +172,11 @@ void SparagraphT(){
 				ST_print(randint, T, 0,els_time);
 			}
 		}
+		diff_clock = end_clock - start_clock;
+				els_time = diff_clock / CLOCKS_PER_SEC;
+				ST_print(randint, T, 0,els_time);
 		while (1) {
-			if (c = getch()=='\n') break;
+			if (c = getch_flush()=='\n') break;
 			else if(c == 27){
 				system("clear");
 				main();
@@ -188,9 +190,9 @@ void SparagraphT(){
 	}
 	system("clear");
 	ST_print(randint, T, 0,els_time);
-	printf("Enter 키를 누르면 돌아갑니다.");
+	printf("Enter 키를 누르면 돌아갑니다.\n");
 	while (1) {
-		if (c = getch() == '\n') {
+		if (c = getch_flush() == '\n') {
 			system("clear");
 			main();
 		}
@@ -244,7 +246,6 @@ void LT_print(int randint,double els) {
 		}
 		printf("\n");
 		for (int j = 0; j <= LT_ln; j++){
-			//puts(long_input[j]);
 			printf("%s",long_input[j]);
 		}
 	}
@@ -254,7 +255,6 @@ void LT_print(int randint,double els) {
 		}
 		printf("\n");
 		for (int i = 5; i <= LT_ln; i++){
-			//puts(long_input[i]);
 			printf("%s", long_input[i]);
 		}
 	}
@@ -279,8 +279,7 @@ void LparagraphT() {
 	LT_print(randint, (double)els_time);
 
 	while (LT_ln<10) {
-		fflush(stdout);
-		c = getch();
+		c = getch_flush();
 		if (c == 27) { //ESC 키  
 			system("clear");
 			main();
@@ -332,13 +331,14 @@ void LparagraphT() {
 		LT_print(randint, els_time);
 	}
 	//연습 끝 ===
-	//printf("정확도 : %.0f%% 현재타수 : %.2lf\nEnter 키를 누르면 돌아갑니다", (double)LT_count_answers(randint) / LT_count_inputs() * 100, (double)LT_count_answers(randint)/els_time*60);
-	/*while (1) {
-		if (c = getch() == 13) {
+	system("clear");
+	printf("정확도 : %.0f%% 현재타수 : %.2lf\nEnter 키를 누르면 돌아갑니다", (double)LT_count_answers(randint) / LT_count_inputs() * 100, (double)LT_count_answers(randint)/els_time*60);
+	while (1) {
+		if (c = getch_flush() == 13) {
 			system("clear");
 			main();
 		}
-	}*/
+	}
 }
 
 int main() {
