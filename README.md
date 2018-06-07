@@ -1,6 +1,5 @@
 # tajaproject
 타자연습 프로젝트<br>
-getch() 대신 getch_flush() 사용해주세요!
 
 모르는건 카톡으로
 010 9854 6301
