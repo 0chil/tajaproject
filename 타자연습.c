@@ -20,9 +20,21 @@ char long_para[4][10][100] = {"The Middle\n","Take a seat right over there, sat 
 char long_input[10][100] = {'\0',};
 int LT_length[10] = { 0, };
 int LT_ln = 0, LT_col = 0;
-	clock_t start_clock, end_clock, els_time;
 
-char short_para[30][200] = { "To marry is to halve your rights and double your duties.","He makes no friend who never made a foe.","Common sense is the collection of prejudices acquired by age 18.","The unleashed power of the atom has changed everything save our modes of thinking, and we thus drift toward unparalleled catastrophes.","Nothing is more despicable than respect based on fear.","Television has proved that people will look at anything rather than each other.","It is only with the heart that one can see rightly; what is essential is invisible to the eye.","Love does not consist in gazing at each other, but in looking together in the same direction.","Business? It's quite simple. It's other people's money.","I would as soon leave my son a curse as the almighty dollar.","A great writer is, so to speak, a second government in his country. And for that reason no regime has ever loved great writers, only minor ones.","You don't live in a world all alone. Your brothers are here too.","A hungry man is not a free man.","To know is nothing at all; to imagine is everything.","Truth is generally the best vindication against slander.","It is my intention to present - through the medium of photography - intuitive observations of the natural world which may have meaning to the spectators.","America is a large, friendly dog in a very small room. Every time it wags its tail it knocks over a chair.","The secret of business is to know something that nobody else knows.","One man with courage makes a majority.","Television has a real problem. They have no page two.","Man is born to live, not to prepare for life. Life itself, the phenomenon of life, the gift of life, is so breathtakingly serious!","Like all great travellers, I have seen more than I remember, and remember more than I have seen.","The magic of first love is our ignorance that it can ever end.","When men are employed, they are best contented.","When she finally stopped conforming to the conventional picture of femininity she finally began to enjoy being a woman.","Anything you're good at contributes to happiness.","Accurst be he that first invented war.","Since a politician never believes what he says, he is surprised when others believe him.","A woman means by unselfishness chiefly taking trouble for others; a man means not giving trouble to others. Thus each sex regards the other as basically selfish.","Freedom is a system based on courage." };
+char short_para[30][200] = { "To marry is to halve your rights and double your duties.","He makes no friend who never made a foe.","Common sense is the collection of prejudices acquired by age 18."\
+,"The unleashed power of the atom has changed everything save our modes of thinking, and we thus drift toward unparalleled catastrophes.","Nothing is more despicable than respect based on fear."\
+,"Television has proved that people will look at anything rather than each other.","It is only with the heart that one can see rightly; what is essential is invisible to the eye."\
+,"Love does not consist in gazing at each other, but in looking together in the same direction.","Business? It's quite simple. It's other people's money."\
+,"I would as soon leave my son a curse as the almighty dollar.","A great writer is, so to speak, a second government in his country. And for that reason no regime has ever loved great writers, only minor ones."\
+,"You don't live in a world all alone. Your brothers are here too.","A hungry man is not a free man.","To know is nothing at all; to imagine is everything."\
+,"Truth is generally the best vindication against slander.","It is my intention to present - through the medium of photography - intuitive observations of the natural world which may have meaning to the spectators."\
+,"America is a large, friendly dog in a very small room. Every time it wags its tail it knocks over a chair.","The secret of business is to know something that nobody else knows."\
+,"One man with courage makes a majority.","Television has a real problem. They have no page two.","Man is born to live, not to prepare for life. Life itself, the phenomenon of life, the gift of life, is so breathtakingly serious!"\
+,"Like all great travellers, I have seen more than I remember, and remember more than I have seen.","The magic of first love is our ignorance that it can ever end."\
+,"When men are employed, they are best contented.","When she finally stopped conforming to the conventional picture of femininity she finally began to enjoy being a woman.","Anything you're good at contributes to happiness."\
+,"Accurst be he that first invented war.","Since a politician never believes what he says, he is surprised when others believe him."\
+,"A woman means by unselfishness chiefly taking trouble for others; a man means not giving trouble to others. Thus each sex regards the other as basically selfish."\
+,"Freedom is a system based on courage." };
 char short_input[5][200] = { '\0', };
 int st_length[5] = {0,};
 int corcnt=0;
@@ -84,10 +96,14 @@ void positionT() {
 	}
 }
 
-void word()
+void wordT()
 {	
 	srand(time(NULL));	
-	char word[100][10]={"the","of","and","a","to","in","is","you","that","it","he","was","for","on","are","as","with","his","they","I","at","be","this","have","from","or","one","had","by","word","but","not","what","we","when","your","can","said","there","use","an","each","which","she","do","how","their","if","will","up","other","about","out","many","then","them","these","so","some","her","would","make","like","him","into","time","has","look","two","more","write","go","see","number","no","way","could","people","my","than","first","water","been","call","who","oil","its","now","find","long","down","day","did","get","come","made","may","part"};
+	char word[100][10]={"the","of","and","a","to","in","is","you","that","it","he","was","for","on","are","as","with","his","they"\
+	,"I","at","be","this","have","from","or","one","had","by","word","but","not","what","we","when","your","can","said","there","use"\
+	,"an","each","which","she","do","how","their","if","will","up","other","about","out","many","then","them","these","so","some","her"\
+	,"would","make","like","him","into","time","has","look","two","more","write","go","see","number","no","way","could","people","my"\
+	,"than","first","water","been","call","who","oil","its","now","find","long","down","day","did","get","come","made","may","part"};
 	int try=0,wrong=0;
 	system("clear");
 	while(try<20)
@@ -148,11 +164,9 @@ void word()
 void ST_print(int randint, int T, int save, double els_time) {
 	system("clear");
 	int son=0;
-	for(int i=0;i<=strlen(short_input[T]);i++){
-		if( (short_para[randint][i] == short_input[T][i]) && short_input[T][i] != '\0'){
-			son++;
-		}
-	}
+	for(int i=0;i<=strlen(short_input[T]);i++)
+		if( (short_para[randint][i] == short_input[T][i]) && short_input[T][i] != '\0')	son++;
+
 	if(save==1){
 		corcnt+=son;
 		son=0;
@@ -162,9 +176,8 @@ void ST_print(int randint, int T, int save, double els_time) {
 		mother+=strlen(short_input[i]);
 	}
 	tpm=(double)(corcnt+son)/els_time*60;
-	if(tpm<5000.0) 
-		htpm=(tpm>htpm)?tpm:htpm;
-	//진행도, 정확도, 최고타수, 현재타수 출력
+	htpm=(tpm>htpm) ? tpm:htpm;
+
 	if((corcnt+son)<1)
 		printf("진행도 : %.0f%% 정확도 : %.0f%% 최고타수 : %.2lf 현재타수 : %.2lf\n", (double)T/5*100, 0.0, 0.0, 0.0);
 	else
@@ -177,61 +190,55 @@ void ST_print(int randint, int T, int save, double els_time) {
 }
 
 void SparagraphT(){
-	tpm=0.0;htpm=0.0;corcnt=0;
-
 	for(int i=0;i<5;i++)
 		st_length[i]=0;
-
-	clock_t start_clock, end_clock, diff_clock, els_time;
-	start_clock = clock();
-
-	int T = 0,c;
+	tpm=0.0;htpm=0.0;corcnt=0;	int c,randint,T=0;
 	srand(time(NULL)); //시드 초기화
+	time_t start_time, end_time, els_time;
+	start_time = time(NULL);
 
 	for (int i = 0; i<5; i++)
 		for (int j = 0; j<200; j++)
 			short_input[i][j] = '\0'; //입력 배열 초기화 
 
-	int randint;
 	while (T<5) {
 		randint = rand() % 30; //랜덤 지정
 
 		for (int i = 0; i<5; i++)
 			st_length[i] = strlen(short_para[randint]) - 1;//1부터 센다(길이) 
 
-		end_clock = clock();
-		diff_clock = end_clock - start_clock;
-		els_time = diff_clock / CLOCKS_PER_SEC;
+		end_time = time(NULL);
+		els_time = end_time - start_time;
 		ST_print(randint, T, 0,els_time);
 
-		while(strlen(short_input[T]) <= st_length[T]){
+		while(strlen(short_input[T]) <= st_length[T]){ //While
+
 			if ((c = getch_flush()) == 27) { //ESC 키  
 				system("clear");
 				main();
 			}
-			else if (c == 127) { //백스페이스
 
+			else if (c == 127) { //백스페이스
 				int len = strlen(short_input[T]);
 				if (len > 0) {
 					short_input[T][len] = '\0';
 					short_input[T][len - 1] = '\0';
-					end_clock = clock();
-					diff_clock = end_clock - start_clock;
-					els_time = diff_clock / CLOCKS_PER_SEC;
+					end_time = time(NULL);
+					els_time = end_time - start_time;
 					ST_print(randint, T, 0,els_time);
 				}
 			}
+
 			else if(c!='\n') {
 				short_input[T][strlen(short_input[T])] = c;
-				end_clock = clock();
-				diff_clock = end_clock - start_clock;
-				els_time = diff_clock / CLOCKS_PER_SEC;
+				end_time = time(NULL);
+				els_time = end_time - start_time;
 				ST_print(randint, T, 0,els_time);
 			}
-		}
-		diff_clock = end_clock - start_clock;
-				els_time = diff_clock / CLOCKS_PER_SEC;
-				ST_print(randint, T, 0,els_time);
+		}//End of while()
+		els_time = end_time - start_time;
+		ST_print(randint, T, 0,els_time);
+
 		while (1) {
 			if (c = getch_flush()=='\n') break;
 			else if(c == 27){
@@ -239,9 +246,8 @@ void SparagraphT(){
 				main();
 			}
 		}
-		end_clock = clock();
-		diff_clock = end_clock - start_clock;
-		els_time = diff_clock / CLOCKS_PER_SEC;
+		end_time = time(NULL);
+		els_time = end_time - start_time;
 		ST_print(randint, T, 1, els_time);
 		T++;
 	}
@@ -259,80 +265,67 @@ void SparagraphT(){
 
 int LT_count_answers(int randint) {
 	int corcnt = 0;
-	for (int i = 0; i <= LT_ln; i++){
-		for (int j = 0; j <= LT_length[i]; j++){
-			if (long_para[randint][i][j] == long_input[i][j] && long_input[i][j] != '\n' && long_input[i][j] != '\0'){
+	for (int i = 0; i <= LT_ln; i++)
+		for (int j = 0; j <= LT_length[i]; j++)
+			if (long_para[randint][i][j] == long_input[i][j] && long_input[i][j] != '\n' && long_input[i][j] != '\0')
 				corcnt++;
-			}
-		}
-	}
 	return corcnt;
 }
 
 int LT_count_inputs() {
 	int cnt = 0;
-	for (int i = 0; i <= LT_ln; i++){
-		for (int j = 0; j <= LT_length[i]; j++){
-			if (long_input[i][j] != '\n' && long_input[i][j] != '\0'){
+	for (int i = 0; i <= LT_ln; i++)
+		for (int j = 0; j <= LT_length[i]; j++)
+			if (long_input[i][j] != '\n' && long_input[i][j] != '\0')
 				cnt++;
-			}
-		}
-	}
+	if(cnt<=0) return 999999999999999999999999;
 	return cnt;
 }
-
+	
 void LT_print(int randint,double els) {
-	//fflush(stdout);
 	system("clear");
-	//printf("\n");
 	//printf("%d %d / %d %d\n", LT_ln, LT_col, LT_count_answers(randint),LT_count_inputs()); //현 위치 체크(디버깅) 
 	//정확도, 현재타수 출력
 	
-	if((double)LT_count_answers(randint) / LT_count_inputs() * 100 < 1){
+	/*if((double)LT_count_answers(randint) / LT_count_inputs() * 100 < 1){
 		printf("정확도 : %.0lf%% 현재타수 : %.2lf\n", 0.0, 0.0);
 	}
-	else{
-		printf("정확도 : %.0lf%% 현재타수 : %.2lf\n", (double)LT_count_answers(randint) / LT_count_inputs() * 100, els);
-	}
-
+	else{*/
+		printf("정확도 : %.0lf%% 현재타수 : %.2lf\n", (double)LT_count_answers(randint) / LT_count_inputs() * 100, (double)LT_count_answers(randint)/els*60);
+	//}
+	if(els<0)return;
 
 	//정답 출력  
 	if (LT_ln<5){
-		for (int i = 0; i<5; i++){
+		for (int i = 0; i<5; i++)
 			printf("%s", long_para[randint][i]);
-		}
 		printf("\n");
-		for (int j = 0; j <= LT_ln; j++){
+		for (int j = 0; j <= LT_ln; j++)
 			printf("%s",long_input[j]);
-		}
 	}
 	else{
-		for (int i = 5; i<10; i++){
+		for (int i = 5; i<10; i++)
 			printf("%s", long_para[randint][i]);
-		}
 		printf("\n");
-		for (int i = 5; i <= LT_ln; i++){
+		for (int i = 5; i <= LT_ln; i++)
 			printf("%s", long_input[i]);
-		}
 	}
 }
 
 void LparagraphT() {
 	srand(time(NULL)); //시드 초기화
-
-	for (int i = 0; i<10; i++)
-		for (int j = 0; j<100; j++)
-			long_input[i][j] = '\0'; //입력 배열 초기화 
-
-	LT_ln = 0, LT_col = 0; //행,열 초기화 
-
-	int randint = rand() % 4, c; //랜덤 지정 
-
+	int c, randint = rand() % 4; //랜덤 지정
+	time_t start_time, end_time, els_time;
+ 	start_time = time(NULL);
 	for (int i = 0; i<10; i++)
 		LT_length[i] = strlen(long_para[randint][i]) - 1;//1부터 센다(길이) 
 
-	end_clock = clock();
-	els_time = (float)(end_clock - start_clock) / (CLOCKS_PER_SEC);
+	for (int i = 0; i<10; i++)
+		for (int j = 0; j<100; j++)
+			long_input[i][j] = '\0'; //입력 배열 초기화
+	LT_ln = 0, LT_col = 0; //행,열 초기화 
+	end_time = time(NULL);
+	els_time = end_time - start_time;
 	LT_print(randint, (double)els_time);
 
 	while (LT_ln<10) {
@@ -383,15 +376,17 @@ void LparagraphT() {
 				LT_col++;
 			}
 		}
-		end_clock = clock();
-		els_time = (float)(end_clock - start_clock) / (CLOCKS_PER_SEC);
+		end_time = time(NULL);
+		els_time = end_time - start_time;
 		LT_print(randint, els_time);
 	}
 	//연습 끝 ===
 	system("clear");
-	printf("정확도 : %.0f%% 현재타수 : %.2lf\nEnter 키를 누르면 돌아갑니다", (double)LT_count_answers(randint) / LT_count_inputs() * 100, (double)LT_count_answers(randint)/els_time*60);
+	end_time = time(NULL);
+	els_time = end_time - start_time;
+	LT_print(randint, els_time);
 	while (1) {
-		if (c = getch_flush() == 13) {
+		if (c = getch_flush() == '\n') {
 			system("clear");
 			main();
 		}
@@ -399,33 +394,32 @@ void LparagraphT() {
 }
 
 int main() {
-	int selection = -1; //선택 함수 초기화
+	int selection;
 	system("clear");
 	printf("무엇을 연습하시겠습니까?\n1) 자리 연습\n2) 낱말 연습\n3) 짧은 글 연습\n4) 긴 글 연습\n5) 종료\n입력 : ");
 	scanf("%d", &selection); //입력 받음
 	switch (selection) {
-	case 1: //1 입력시
+	case 1:
+		system("clear");
 		printf("자리 연습을 시작합니다\n");
-		system("clear");//cygwin 에서 clear 
 		positionT(); //자리연습 함수 실행
 		break;
-	case 2: //2 입력시
+	case 2:
+		system("clear");
 		printf("낱말 연습을 시작합니다\n");
-		system("clear");//cygwin 에서 clear 
 		wordT();
 		break;
-	case 3: //3 입력시
+	case 3:
+		system("clear");
 		printf("짧은 글 연습을 시작합니다\n");
-		system("clear");//cygwin 에서 clear 
 		SparagraphT();
 		break;
-	case 4: //4 입력시
+	case 4:
+		system("clear");
 		printf("긴 글 연습을 시작합니다\n");
-		system("clear");//cygwin 에서 clear 
 		LparagraphT();
-		start_clock = clock();
 		break;
-	default: //5 혹은 이외의 수 입력시
+	default:
 		system("clear");
 		printf("프로그램을 종료합니다");
 		exit(1);
