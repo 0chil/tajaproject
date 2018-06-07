@@ -7,16 +7,16 @@
 
 
 char long_para[4][10][100] = {"The Middle\n","Take a seat right over there, sat on the stairs\n","Stay or leave, the cabinets are bare and I'm unaware\n","Of just how we got into this mess, got so aggressive\n","I know we meant all good intentions\n", \
-"So pull me closer\n","Why don't you pull me close?\n","Why don't you come on over?\n","I can't just let you go\n","Oh baby, why don't you just meet me in the middle?\n", \
+"So pull me closer\n","Why don't you pull me close?\n","Why don't you come on over?\n","I can't just let you go\n","Oh baby, why don't you just meet me in the middle?", \
 
 "Faint\n","I am a little bit of loneliness, a little bit of disregard\n","Handful of complaints but I can't help the fact\n","That everyone can see these scars\n","I am what I want you to want, what I want you to feel\n", \
-"But it's like no matter what I do, I can't convince you\n","To just believe this is real\n","So I, let go watching you turn your back like you always do\n","Face away and pretend I'm not\n","But I'll be here 'cause you're all that I've got\n", \
+"But it's like no matter what I do, I can't convince you\n","To just believe this is real\n","So I, let go watching you turn your back like you always do\n","Face away and pretend I'm not\n","But I'll be here 'cause you're all that I've got", \
 
 "Wolves\n","In your eyes, there's a heavy blue\n","One to love and one to lose\n","Sweet divide, a heavy truth\n","Water or wine, don't make me choose\n", \
-"I wanna feel the way that we did that summer night\n","Drunk on a feeling, alone with the stars in the sky\n","I've been running through the jungle\n","I've been running with the wolves\n","To get to you, to get to you\n", \
+"I wanna feel the way that we did that summer night\n","Drunk on a feeling, alone with the stars in the sky\n","I've been running through the jungle\n","I've been running with the wolves\n","To get to you, to get to you", \
 
 "Butterflies And Hurricanes\n","Change everything you are\n","And everything you were\n","Your number has been called\n","Fights and battles have begun\n", \
-"Revenge will surely come\n","Your hard times are ahead\n","Best, You've got to be the best\n","You've got to change the world\n","And use this chance to be heard\n"};
+"Revenge will surely come\n","Your hard times are ahead\n","Best, You've got to be the best\n","You've got to change the world\n","And use this chance to be heard"};
 char long_input[10][100] = {'\0',};
 int LT_length[10] = { 0, };
 int LT_ln = 0, LT_col = 0;
@@ -40,7 +40,7 @@ int st_length[5] = {0,};
 int corcnt=0;
 double tpm=0.0,htpm=0.0;
 
-int getch_flush(void){
+int getch(void){
 	fflush(stdout);
 	char ch;
 	struct termios t_old,t_new;
@@ -52,6 +52,7 @@ int getch_flush(void){
 	tcsetattr(STDIN_FILENO, TCSANOW, &t_old);
 	return ch;
 }
+
 int main(); //메인 함수로 돌아가기 위해
 
 void positionT() {
@@ -69,7 +70,7 @@ void positionT() {
 		printf("***********\n");
 		printf("%d번째 입력\n", hit + 1);
 		printf("진행도:%.0f%%\n오타수:%d\n정확도:%.2f%%\n", (double)prog/20*100, miss, acc * 100);
-		input = getch_flush();
+		input = getch();
 		if (input == answer) {
 			prog++;
 			hit++;
@@ -87,9 +88,9 @@ void positionT() {
 		}
 	}
 	system("clear");
-	printf("시도횟수: %d , 오타수:%d , 정확도:%.2f%%\n", hit, miss, acc * 100);
+	printf("결과입니다\n시도횟수: %d , 오타수:%d , 정확도:%.2f%%\n\n돌아가시려면 Enter키를 누르세요", hit, miss, acc * 100);
 	while(1) {
-		if (input=getch_flush() == '\n') {
+		if (input=getch() == '\n') {
 			system("clear");
 			main();
 		}
@@ -118,7 +119,7 @@ void wordT()
 		printf("\n");
 		for(int i=0;i<30;i++)//입력값 받기
 		{
-			userinput[i]=getch_flush();
+			userinput[i]=getch();
 			if(userinput[i]==127)
 			{
 				printf("\b \b");
@@ -187,12 +188,14 @@ void ST_print(int randint, int T, int save, double els_time) {
 	printf("%s\n\n", short_para[randint]);
 	//지금까지 입력된 것 출력
 	printf("%s", short_input[T]);
+	fflush(stdout);
 }
 
 void SparagraphT(){
 	for(int i=0;i<5;i++)
 		st_length[i]=0;
-	tpm=0.0;htpm=0.0;corcnt=0;	int c,randint,T=0;
+	tpm=0.0;htpm=0.0;corcnt=0;
+	int c,randint,T=0;
 	srand(time(NULL)); //시드 초기화
 	time_t start_time, end_time, els_time;
 	start_time = time(NULL);
@@ -213,7 +216,7 @@ void SparagraphT(){
 
 		while(strlen(short_input[T]) <= st_length[T]){ //While
 
-			if ((c = getch_flush()) == 27) { //ESC 키  
+			if ((c = getch()) == 27) { //ESC 키  
 				system("clear");
 				main();
 			}
@@ -236,11 +239,9 @@ void SparagraphT(){
 				ST_print(randint, T, 0,els_time);
 			}
 		}//End of while()
-		els_time = end_time - start_time;
-		ST_print(randint, T, 0,els_time);
 
 		while (1) {
-			if (c = getch_flush()=='\n') break;
+			if (c = getch()=='\n') break;
 			else if(c == 27){
 				system("clear");
 				main();
@@ -252,10 +253,11 @@ void SparagraphT(){
 		T++;
 	}
 	system("clear");
+	printf("결과입니다\n");
 	ST_print(randint, T, 0,els_time);
-	printf("Enter 키를 누르면 돌아갑니다.\n");
+	printf("돌아가시려면 Enter키를 누르세요\n");
 	while (1) {
-		if (c = getch_flush() == '\n') {
+		if (c = getch() == '\n') {
 			system("clear");
 			main();
 		}
@@ -272,13 +274,13 @@ int LT_count_answers(int randint) {
 	return corcnt;
 }
 
-int LT_count_inputs() {
+long long LT_count_inputs() {
 	int cnt = 0;
 	for (int i = 0; i <= LT_ln; i++)
 		for (int j = 0; j <= LT_length[i]; j++)
 			if (long_input[i][j] != '\n' && long_input[i][j] != '\0')
 				cnt++;
-	if(cnt<=0) return 999999999999999999999999;
+	if(cnt<=0) return 9999999999999999;
 	return cnt;
 }
 	
@@ -287,13 +289,12 @@ void LT_print(int randint,double els) {
 	//printf("%d %d / %d %d\n", LT_ln, LT_col, LT_count_answers(randint),LT_count_inputs()); //현 위치 체크(디버깅) 
 	//정확도, 현재타수 출력
 	
-	/*if((double)LT_count_answers(randint) / LT_count_inputs() * 100 < 1){
+	if(els <= 0.0){
 		printf("정확도 : %.0lf%% 현재타수 : %.2lf\n", 0.0, 0.0);
 	}
-	else{*/
+	else{
 		printf("정확도 : %.0lf%% 현재타수 : %.2lf\n", (double)LT_count_answers(randint) / LT_count_inputs() * 100, (double)LT_count_answers(randint)/els*60);
-	//}
-	if(els<0)return;
+	}
 
 	//정답 출력  
 	if (LT_ln<5){
@@ -310,6 +311,7 @@ void LT_print(int randint,double els) {
 		for (int i = 5; i <= LT_ln; i++)
 			printf("%s", long_input[i]);
 	}
+	fflush(stdout);
 }
 
 void LparagraphT() {
@@ -329,7 +331,7 @@ void LparagraphT() {
 	LT_print(randint, (double)els_time);
 
 	while (LT_ln<10) {
-		c = getch_flush();
+		c = getch();
 		if (c == 27) { //ESC 키  
 			system("clear");
 			main();
@@ -382,11 +384,9 @@ void LparagraphT() {
 	}
 	//연습 끝 ===
 	system("clear");
-	end_time = time(NULL);
-	els_time = end_time - start_time;
-	LT_print(randint, els_time);
+	printf("결과입니다\n정확도 : %.0lf%% 현재타수 : %.2lf\n\n돌아가시려면 Enter키를 누르세요", (double)LT_count_answers(randint) / LT_count_inputs() * 100, (double)LT_count_answers(randint)/els_time*60);
 	while (1) {
-		if (c = getch_flush() == '\n') {
+		if (c = getch() == '\n') {
 			system("clear");
 			main();
 		}
