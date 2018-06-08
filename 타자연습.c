@@ -57,21 +57,15 @@ int main(); //메인 함수로 돌아가기 위해
 
 void positionT() {
 	srand(time(NULL));
-	int caps = rand() % 2, alpha = rand() % 26;
-	int answer = (caps ? 65 : 97) + alpha, input;
-	int prog = 0, miss = 0, hit = 0;
+	int caps = rand() % 2, alpha = rand() % 26,answer = (caps ? 65 : 97) + alpha, input, prog = 0, miss = 0, hit = 0;
 	double acc = 0;
 	while (prog < 20) {
 		if (hit>0)
 			acc = (hit - miss) / (double)hit;
 		system("clear");
-		printf("***********\n");
-		printf("     %c     \n", answer);
-		printf("***********\n");
-		printf("%d번째 입력\n", hit + 1);
+		printf("***********\n     %c     \n***********\n%d번째 입력\n", answer, hit+1);
 		printf("진행도:%.0f%%\n오타수:%d\n정확도:%.2f%%\n", (double)prog/20*100, miss, acc * 100);
-		input = getch();
-		if (input == answer) {
+		if ((input = getch()) == answer) {
 			prog++;
 			hit++;
 			caps = rand() % 2;
@@ -166,15 +160,15 @@ void ST_print(int randint, int T, int save, double els_time) {
 	system("clear");
 	int son=0;
 	for(int i=0;i<=strlen(short_input[T]);i++)
-		if( (short_para[randint][i] == short_input[T][i]) && short_input[T][i] != '\0')	son++;
+		if( (short_para[randint][i] == short_input[T][i]))	son++; //맞은수 (1줄당) 카운트
 
 	if(save==1){
-		corcnt+=son;
+		corcnt+=son;  //맞은수저장 
 		son=0;
 	}
 	int mother=0;
 	for(int i=0;i<=T;i++){
-		mother+=strlen(short_input[i]);
+		mother+=strlen(short_input[i]); //입력받은 갯수
 	}
 	tpm=(double)(corcnt+son)/els_time*60;
 	htpm=(tpm>htpm) ? tpm:htpm;
@@ -192,8 +186,6 @@ void ST_print(int randint, int T, int save, double els_time) {
 }
 
 void SparagraphT(){
-	for(int i=0;i<5;i++)
-		st_length[i]=0;
 	tpm=0.0;htpm=0.0;corcnt=0;
 	int c,randint,T=0;
 	srand(time(NULL)); //시드 초기화
@@ -224,7 +216,7 @@ void SparagraphT(){
 			else if (c == 127) { //백스페이스
 				int len = strlen(short_input[T]);
 				if (len > 0) {
-					short_input[T][len] = '\0';
+					//short_input[T][len] = '\0';
 					short_input[T][len - 1] = '\0';
 					end_time = time(NULL);
 					els_time = end_time - start_time;
@@ -241,7 +233,7 @@ void SparagraphT(){
 		}//End of while()
 
 		while (1) {
-			if (c = getch()=='\n') break;
+			if ((c = getch())=='\n') break;
 			else if(c == 27){
 				system("clear");
 				main();
@@ -425,4 +417,3 @@ int main() {
 		exit(1);
 	}
 }
-
