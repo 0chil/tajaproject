@@ -94,12 +94,9 @@ void positionT() {
 void wordT()
 {	
 	srand(time(NULL));	
-	char word[100][10]={"the","of","and","a","to","in","is","you","that","it","he","was","for","on","are","as","with","his","they"\
-	,"I","at","be","this","have","from","or","one","had","by","word","but","not","what","we","when","your","can","said","there","use"\
-	,"an","each","which","she","do","how","their","if","will","up","other","about","out","many","then","them","these","so","some","her"\
-	,"would","make","like","him","into","time","has","look","two","more","write","go","see","number","no","way","could","people","my"\
-	,"than","first","water","been","call","who","oil","its","now","find","long","down","day","did","get","come","made","may","part"};
-	int try=0,wrong=0;
+	char word[100][10]={"present","realize","the","of","and","a","to","in","is","you","that","it","he","was","for","on","are","as","with","his","they","I","at","be","this","have","from","or","one","had","by","word","but","not","what","we","when","your","can","said","there","use","an","each","which","she","do","how","their","if","will","up","other","about","out","many","then","them","these","so","some","her","would","make","like","him","into","time","has","look","two","more","write","go","see","number","no","way","could","people","my","than","first","water","been","call","who","oil","its","now","find","long","down","day","did","get","come","made","may","part"};
+	int try=0,wrong=0,a;
+	char out[]="###";
 	system("clear");
 	while(try<20)
 	{	
@@ -111,38 +108,25 @@ void wordT()
 		int random=rand()%100;
 		printf("%s",word[random]);
 		printf("\n");
-		for(int i=0;i<30;i++)//입력값 받기
+		scanf("%s",&userinput);//입력
+		try++;
+		a=strcmp(userinput,out);
+		if(a==0)
 		{
-			userinput[i]=getch();
-			if(userinput[i]==127)
-			{
-				printf("\b \b");
-			}		
-			else if(userinput[i]==10)
-			{
-				try++;		
-				break;
-			}
-			else
-				printf("%c",userinput[i]);
-		}
-		for(int i=0;i<30;i++)//배열정리
-		{
-			if(userinput[i]==127)
-			{
-				for(int j=i;j<10;j++)
-				{
-					userinput[j-1]=userinput[j+1];
-					if(userinput[j]=='\0')
-						break;
+			system("clear");
+			printf("결과입니다\n");
+			printf("진행율: %d%%  오타수 : %d  정확도 : %d%% \n",5*try,wrong,(int)(double)100*(try-wrong)/try);
+			printf("돌아가시려면 Enter키를 누르세요\n");
+			int c;
+			while (1) {
+				if (c = getch() == '\n') {
+					system("clear");
+					main();
 				}
-				i=i-2;
 			}
 		}
 		for(int i=0;i<10;i++)//오타수 결정
 		{
-			if(userinput[i]==10)
-				break;
 			if(userinput[i]!=word[random][i])
 			{
 				wrong++;
@@ -151,9 +135,20 @@ void wordT()
 		}
 		system("clear");
 	}
-	printf("메뉴로 돌아갑니다");
+	/*printf("메뉴로 돌아갑니다");
 	sleep(3);
-	main();
+	main();*/
+	system("clear");
+	printf("결과입니다\n");
+	printf("진행율: %d%%  오타수 : %d  정확도 : %d%% \n",5*try,wrong,(int)(double)100*(try-wrong)/try);
+	printf("돌아가시려면 Enter키를 누르세요\n");
+	int c;
+	while (1) {
+		if (c = getch() == '\n') {
+			system("clear");
+			main();
+		}
+	}
 }
 
 void ST_print(int randint, int T, int save, double els_time) {
