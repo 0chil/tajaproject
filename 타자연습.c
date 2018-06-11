@@ -154,7 +154,7 @@ void wordT()
 void ST_print(int randint, int T, int save, double els_time) {
 	system("clear");
 	int son=0;
-	for(int i=0;i<=strlen(short_input[T]);i++)
+	for(int i=0;i<strlen(short_input[T]);i++)
 		if( (short_para[randint][i] == short_input[T][i]))	son++; //맞은수 (1줄당) 카운트
 
 	if(save==1){
@@ -169,9 +169,9 @@ void ST_print(int randint, int T, int save, double els_time) {
 	htpm=(tpm>htpm) ? tpm:htpm;
 
 	if((corcnt+son)<1)
-		printf("진행도 : %.0f%% 정확도 : %.0f%% 최고타수 : %.2lf 현재타수 : %.2lf\n", (double)T/5*100, 0.0, 0.0, 0.0);
+		printf("진행도 : %.0f%% 정확도 : %d%% 최고타수 : %.2lf 현재타수 : %.2lf\n", (double)T/5*100, (int)0.0, 0.0, 0.0);
 	else
-		printf("진행도 : %.0f%% 정확도 : %.0f%% 최고타수 : %.2lf 현재타수 : %.2lf\n", (double)T/5*100, (double)(corcnt+son)/mother*100, htpm, tpm);
+		printf("진행도 : %.0f%% 정확도 : %d%% 최고타수 : %.2lf 현재타수 : %.2lf\n", (double)T/5*100, (int)((double)(corcnt+son)/mother*100), htpm, tpm);
 	if (T>4) return;
 	//정답 출력  
 	printf("%s\n\n", short_para[randint]);
@@ -277,10 +277,10 @@ void LT_print(int randint,double els) {
 	//정확도, 현재타수 출력
 	
 	if(els <= 0.0){
-		printf("정확도 : %.0lf%% 현재타수 : %.2lf\n", 0.0, 0.0);
+		printf("정확도 : %d%% 현재타수 : %.2lf\n", (int)0.0, 0.0);
 	}
 	else{
-		printf("정확도 : %.0lf%% 현재타수 : %.2lf\n", (double)LT_count_answers(randint) / LT_count_inputs() * 100, (double)LT_count_answers(randint)/els*60);
+		printf("정확도 : %d%% 현재타수 : %.2lf\n", (int)((double)LT_count_answers(randint) / LT_count_inputs() * 100), (double)LT_count_answers(randint)/els*60);
 	}
 
 	//정답 출력  
