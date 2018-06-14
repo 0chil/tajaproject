@@ -135,9 +135,6 @@ void wordT()
 		}
 		system("clear");
 	}
-	/*printf("메뉴로 돌아갑니다");
-	sleep(3);
-	main();*/
 	system("clear");
 	printf("결과입니다\n");
 	printf("진행율: %d%%  오타수 : %d  정확도 : %d%% \n",5*try,wrong,(int)(double)100*(try-wrong)/try);
@@ -184,8 +181,8 @@ void SparagraphT(){
 	tpm=0.0;htpm=0.0;corcnt=0;
 	int c,randint,T=0;
 	srand(time(NULL)); //시드 초기화
-	time_t start_time, end_time, els_time;
-	start_time = time(NULL);
+	struct timeval start, end, result;
+	gettimeofday(&start,NULL);
 
 	for (int i = 0; i<5; i++)
 		for (int j = 0; j<200; j++)
@@ -197,9 +194,9 @@ void SparagraphT(){
 		for (int i = 0; i<5; i++)
 			st_length[i] = strlen(short_para[randint]) - 1;//1부터 센다(길이) 
 
-		end_time = time(NULL);
-		els_time = end_time - start_time;
-		ST_print(randint, T, 0,els_time);
+		gettimeofday(&end, NULL);
+		timersub(&end, &start, &result);
+		ST_print(randint, T, 0,(double)result.tv_sec);
 
 		while(strlen(short_input[T]) <= st_length[T]){ //While
 
@@ -213,17 +210,17 @@ void SparagraphT(){
 				if (len > 0) {
 					//short_input[T][len] = '\0';
 					short_input[T][len - 1] = '\0';
-					end_time = time(NULL);
-					els_time = end_time - start_time;
-					ST_print(randint, T, 0,els_time);
+					gettimeofday(&end, NULL);
+					timersub(&end, &start, &result);
+					ST_print(randint, T, 0,(double)result.tv_sec);
 				}
 			}
 
 			else if(c!='\n') {
 				short_input[T][strlen(short_input[T])] = c;
-				end_time = time(NULL);
-				els_time = end_time - start_time;
-				ST_print(randint, T, 0,els_time);
+				gettimeofday(&end, NULL);
+				timersub(&end, &start, &result);
+				ST_print(randint, T, 0,(double)result.tv_sec);
 			}
 		}//End of while()
 
@@ -234,14 +231,14 @@ void SparagraphT(){
 				main();
 			}
 		}
-		end_time = time(NULL);
-		els_time = end_time - start_time;
-		ST_print(randint, T, 1, els_time);
+		gettimeofday(&end, NULL);
+		timersub(&end, &start, &result);
+		ST_print(randint, T, 1,(double)result.tv_sec);
 		T++;
 	}
 	system("clear");
 	printf("결과입니다\n");
-	ST_print(randint, T, 0,els_time);
+	ST_print(randint, T, 0,(double)result.tv_sec);
 	printf("돌아가시려면 Enter키를 누르세요\n");
 	while (1) {
 		if (c = getch() == '\n') {
@@ -275,7 +272,7 @@ void LT_print(int randint,double els) {
 	system("clear");
 	//printf("%d %d / %d %d\n", LT_ln, LT_col, LT_count_answers(randint),LT_count_inputs()); //현 위치 체크(디버깅) 
 	//정확도, 현재타수 출력
-	
+	printf("%lf",els);
 	if(els <= 0.0){
 		printf("정확도 : %d%% 현재타수 : %.2lf\n", (int)0.0, 0.0);
 	}
@@ -304,8 +301,8 @@ void LT_print(int randint,double els) {
 void LparagraphT() {
 	srand(time(NULL)); //시드 초기화
 	int c, randint = rand() % 4; //랜덤 지정
-	time_t start_time, end_time, els_time;
- 	start_time = time(NULL);
+	struct timeval start, end, result;
+	gettimeofday(&start,NULL);
 	for (int i = 0; i<10; i++)
 		LT_length[i] = strlen(long_para[randint][i]) - 1;//1부터 센다(길이) 
 
@@ -313,9 +310,9 @@ void LparagraphT() {
 		for (int j = 0; j<100; j++)
 			long_input[i][j] = '\0'; //입력 배열 초기화
 	LT_ln = 0, LT_col = 0; //행,열 초기화 
-	end_time = time(NULL);
-	els_time = end_time - start_time;
-	LT_print(randint, (double)els_time);
+	gettimeofday(&end, NULL);
+	timersub(&end, &start, &result);
+	LT_print(randint, (double)result.tv_sec);
 
 	while (LT_ln<10) {
 		c = getch();
@@ -365,13 +362,13 @@ void LparagraphT() {
 				LT_col++;
 			}
 		}
-		end_time = time(NULL);
-		els_time = end_time - start_time;
-		LT_print(randint, els_time);
+		gettimeofday(&end, NULL);
+		timersub(&end, &start, &result);
+		LT_print(randint, (double)result.tv_sec);
 	}
 	//연습 끝 ===
 	system("clear");
-	printf("결과입니다\n정확도 : %.0lf%% 현재타수 : %.2lf\n\n돌아가시려면 Enter키를 누르세요", (double)LT_count_answers(randint) / LT_count_inputs() * 100, (double)LT_count_answers(randint)/els_time*60);
+	printf("결과입니다\n정확도 : %.0lf%% 현재타수 : %.2lf\n\n돌아가시려면 Enter키를 누르세요", (double)LT_count_answers(randint) / LT_count_inputs() * 100, (double)LT_count_answers(randint)/(double)(result.tv_sec+result.tv_usec/1000000)*60);
 	while (1) {
 		if (c = getch() == '\n') {
 			system("clear");
